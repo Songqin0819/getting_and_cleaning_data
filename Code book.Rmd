@@ -1,0 +1,74 @@
+---
+title: "Codebook"
+author: "Songqin Wei"
+date: "2020/5/30"
+output: html_document
+---
+this code book describes codes in run_analysis.R for getting and cleaning data project
+
+as is required in the project, five steps are taken:
+
+1. Merges the training and the test sets to create one data set. 
+
+2. Extracts only the measurements on the mean and standard deviation for each measurement.
+
+3. Uses descriptive activity names to name the activities in the data set
+
+4. Appropriately labels the data set with descriptive variable names.
+
+5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
+
+================================================
+STEPS for EXECUTION in run_analysis.R
+
+# STEP1. SETTING GLOBAL OPTIONS AND LOAD PACKAGES
+
+# STEP2. READING ACTIVITY LABEL AND FEATURE FILES
+read activity_labels to activity_labels
+activity_labels: 6 observations of 2 variables
+
+read features to features
+features: 561 observations of 2 variables
+
+# STEP3. READ TEST DATA WITH ACTIVITIES(USING ACTIVITY NAMES NOT ID) ,SUBJECTS, DATAs.
+
+read x_test.txt to test,they are 561 data of measurements
+test: 2947 observations of 561 variables
+
+read y_test.txt to test_activities and then replace the ids using description names
+test_activities:2947 observations of 1 variable
+
+read subject_test.txt to test_subjects
+test_subjects:2947 observations of 1 variable
+
+bind the test_activities,test_subjects,test_data into test_data
+
+test_data : 2947 observations of 563 variables
+
+# STEP4. READ TRAIN DATA WITH ACTIVITIES(USING ACTIVITY NAMES NOT ID) ,SUBJECTS, DATAs.
+
+read x_train.txt to train,they are 561 data of measurements
+train: 2947 observations of 561 variables
+
+read y_train.txt to train_activities and then replace the ids using description names
+train_activities:2947 observations of 1 variable
+
+read subject_train.txt to train_subjects
+train_subjects:2947 observations of 1 variable
+
+bind the train_activities,train_subjects,train_data into train_data
+
+train_data : 2947 observations of 563 variables
+
+# STEP5. BIND the test_data and train_data into data
+data: 10299 observations of 563 variables
+
+# STEP6.Extracts only the measurements whose names end with mean() and std().
+only pick the measurements whose names end with mean() and std() from feature
+features_of_mean_std: int [1:66]
+make a subset of data with colums in features_of_mean_std and activities and subjects
+data_of_mean_std:10299 observations of 68 variables
+# STEP7.set with the average of each variable for each activity and each subject.
+final_data:40 observations of 68 variables
+# STEP8. writing final_data as a txt file called "step5.txt" 
+
